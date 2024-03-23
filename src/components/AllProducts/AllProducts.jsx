@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
-import Layout from '../Layout/Layout'
 import axios from "axios";
 import login from '../../assets/login.png'
 
-const AllProducts = () => {
+const AllProducts = ({ AddToCart }) => {
 
 
 	const [allProducts, setAllProducts] = useState([]);
 
-	const [originalProducts,setOriginalProducts] = useState([])
+	const [originalProducts, setOriginalProducts] = useState([])
 
 
 	const [allCategory, setAllCategory] = useState([])
@@ -55,10 +54,9 @@ const AllProducts = () => {
 	const filterProducts = (selectcategory) => {
 		setSelectProducts(selectcategory);
 
-		const data =  selectcategory? originalProducts.filter((filterItem) => filterItem.category === selectcategory)
-		:originalProducts
+		const data = selectcategory ? originalProducts.filter((filterItem) => filterItem.category === selectcategory)
+			: originalProducts
 		setAllProducts(data)
-		// console.log(allProducts)
 	};
 
 
@@ -70,16 +68,17 @@ const AllProducts = () => {
 	return (
 		<>
 
-			<Layout>
+			<>
 				<div className='relative'>
 					<img src={login} alt="" className="object-cover w-full object-center h-[200px] mt-5" />
 					<div className='w-full h-[200px] bg-black absolute top-0 left-0 opacity-[.4]'></div>
+
 					<h2 className='absolute top-[40%] left-[10%] text-white font-semibold text-3xl md:text-5xl'>AllProducts</h2>
 				</div>
 
 
 				{/* products category section*/}
-				<div className="flex gap-3 flex-wrap">
+				<div className="flex gap-3 flex-wrap justify-center items-center">
 
 					<select onChange={(e) => filterProducts(e.target.value)}>
 						<option>Filter The Products</option>
@@ -100,11 +99,20 @@ const AllProducts = () => {
 					{
 						allProducts.map((AllItems, index) => (
 							<div key={index} className="border-4">
-								<img src={AllItems.thumbnail} alt="" className="object-cover object-center block" />
-								<div className="mt-4">
-									<h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Title:{AllItems.title}</h3>
-									<h2 className="text-gray-900 title-font text-lg font-medium">Rating:{AllItems.rating}</h2>
-									<p className="mt-1">Price:{AllItems.price}Rs.</p>
+								<img src={AllItems.thumbnail} alt="" className="object-cover object-center block h-[300px] w-[450px]" />
+
+								<div className="flex justify-between items-center">
+									<div className="mt-4">
+										<h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Title:{AllItems.title}</h3>
+										<h2 className="text-gray-900 title-font text-lg font-medium">Rating:{AllItems.rating}</h2>
+										<p className="mt-1">Price:{AllItems.price}Rs.</p>
+									</div>
+
+									<div>
+										<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => AddToCart(AllItems)}>
+											Add To Cart
+										</button>
+									</div>
 								</div>
 							</div>
 						))
@@ -119,7 +127,7 @@ const AllProducts = () => {
 
 
 
-			</Layout>
+			</>
 
 		</>
 	)

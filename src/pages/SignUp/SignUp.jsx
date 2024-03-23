@@ -1,11 +1,10 @@
 import React from 'react'
-import Layout from '../../components/Layout/Layout'
 import login from '../../assets/login.png'
 import { Link } from 'react-router-dom'
 
 const SignUp = () => {
   return (
-    <Layout>
+    <>
 
       <div className='relative'>
         <img src={login} alt="" className="object-cover w-full object-center h-[200px] mt-5" />
@@ -38,7 +37,7 @@ const SignUp = () => {
           </p>
         </div>
       </div>
-    </Layout>
+    </>
   )
 }
 
