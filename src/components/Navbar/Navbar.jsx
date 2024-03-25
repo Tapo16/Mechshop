@@ -4,7 +4,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 
-const Navbar = ({ cart }) => {
+const Navbar = ({ cart,userName }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const ToggleChange = () => {
@@ -20,7 +20,7 @@ const Navbar = ({ cart }) => {
             <div>
               <Link to='/'>
                 <h3 className="font-bold text-2xl">
-                  Mesh<span>Shop</span>
+                  Amaxon<span>Shop</span>
                 </h3>
               </Link>
             </div>
@@ -59,8 +59,9 @@ const Navbar = ({ cart }) => {
                 <button className="bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base font-semibold">
                   Login
                 </button>
-
               </Link>
+            <span>{userName}</span>
+
               <Link to='/cart'>
                 <button>
                 <span className="text-[red]">{cart.length}</span>
