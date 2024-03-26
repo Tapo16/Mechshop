@@ -14,6 +14,11 @@ const AllProducts = ({ AddToCart }) => {
 
 	const [selectProducts, setSelectProducts] = useState("")
 
+	const [searchItem, setSearchItem] = useState("")
+
+	const [minPrice, setMinPrice] = useState("")
+	const [maxPrice, setMaxPrice] = useState("")
+
 
 	// All Products
 
@@ -26,8 +31,6 @@ const AllProducts = ({ AddToCart }) => {
 
 		AllProducts();
 	}, [])
-
-
 
 
 
@@ -61,8 +64,31 @@ const AllProducts = ({ AddToCart }) => {
 
 
 	// single products
+	//   search products
 
 
+	const handleSearchItem = () => {
+		const searchProduct = originalProducts.filter((searchFilterItem) => (
+			searchFilterItem.title.toLowerCase().includes(searchItem.toLowerCase())
+		))
+
+		setAllProducts(searchProduct);
+	}
+
+	// price filter
+
+	const handlePrice = () => {
+
+		let min = parseFloat(minPrice)
+		let max = parseFloat(maxPrice)
+
+
+		const filterPrice = originalProducts.filter((priceItem) => (
+			(!min || priceItem.price >= min) && (!max || priceItem.price <= max)
+		))
+
+		setAllProducts(filterPrice)
+	}
 
 
 	return (
@@ -77,28 +103,42 @@ const AllProducts = ({ AddToCart }) => {
 				</div>
 
 
+				<div className="bg-[#e2e0e0] container mx-auto rounded-md py-3 mt-4">
 				{/* products category section*/}
-				<div className="flex gap-3 flex-wrap justify-center items-center">
+					<div className="text-center mt-4">
+						<select onChange={(e) => filterProducts(e.target.value)}>
+							<option>Filter The Products</option>
 
-					<select onChange={(e) => filterProducts(e.target.value)}>
-						<option>Filter The Products</option>
+							{allCategory.slice(0, 6).map((item, index) => (
+								<option value={item} key={index}>{item}</option>
 
-						{allCategory.filter((filterItem) => !["automotive", "motorcycle", "lighting", "furniture"].includes(filterItem)).map((item, index) => (
-							<option value={item} key={index}>{item}</option>
+							))}
+						</select>
+					</div>
+
+					{/* product search */}
 
 
-						))}
-					</select>
+					<div className='text-center mt-3 text-2xl flex items-center justify-center md:flex-row flex-col gap-3'>
+						<input placeholder='Search' className="block w-[80%] md:w-[50%] p-3 ps-10 text-sm  border-white rounded-lg bg-gray-200 focus:ring-blue-500 focus:border-blue dark:bg-gray-400 dark:border-white dark:placeholder-white dark:text-white  dark:focus:border-blue-500" onChange={(e) => setSearchItem(e.target.value)} value={searchItem} />
+						<button className="py-2.5 px-5 ml-4 text-sm font-medium focus:outline-none transition-all dark:bg-red-500 text-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray dark:focus:ring-gray-700 bg-gray-800 dark:text-gray-800 dark:border-gray-400 dark:hover:text-white dark:hover:bg-gray-700" onClick={handleSearchItem}>Search Product</button>
+					</div>
+
+					{/* products filter by price */}
+					<div className="text-center mt-4 mb-2 flex items-center justify-center md:flex-row flex-col gap-3">
+						<input placeholder='min Price' className="px-2 py-2   border-white rounded-lg bg-gray-200 focus:ring-blue-500 focus:border-blue dark:bg-gray-400 dark:border-white dark:placeholder-white dark:text-white  dark:focus:border-blue-500" onChange={(e) => setMinPrice(e.target.value)} value={minPrice} />
+						<input placeholder='max Price' className="px-2 py-2  border-white rounded-lg bg-gray-200 focus:ring-blue-500 focus:border-blue dark:bg-gray-400 dark:border-white dark:placeholder-white dark:text-white  dark:focus:border-blue-500" onChange={(e) => setMaxPrice(e.target.value)} value={maxPrice} />
+						<button className="py-2.5 px-5 me-2 mb-2 ml-4 text-sm font-medium focus:outline-none transition-all dark:bg-red-500 text-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray dark:focus:ring-gray-700 bg-gray-800 dark:text-gray-800 dark:border-gray-400 dark:hover:text-white dark:hover:bg-gray-700" onClick={handlePrice}>Filter by Price</button>
+					</div>
+
+
 				</div>
 
-
-				{/* single products section  */}
-
 				{/* all products */}
-				<div className=" flex gap-4 flex-wrap justify-center">
+				<div className=" flex gap-4 flex-wrap justify-center mt-6">
 					{
-						allProducts.map((AllItems, index) => (
-							<div key={index} className="border-4">
+						allProducts.map((AllItems) => (
+							<div className="border-4" key={AllItems.id}>
 								<img src={AllItems.thumbnail} alt="" className="object-cover object-center block h-[300px] w-[450px]" />
 
 								<div className="flex justify-between items-center">
@@ -118,6 +158,7 @@ const AllProducts = ({ AddToCart }) => {
 						))
 					}
 				</div>
+
 
 
 
