@@ -8,9 +8,12 @@ import SignUp from "./pages/SignUp/SignUp";
 import { useEffect, useState } from "react";
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
-import toast, { Toaster } from 'react-hot-toast';
+import toast,{ Toaster } from 'react-hot-toast';
 import { auth } from './FirebaseAuth/FirebaseAuth';
 import { onAuthStateChanged } from 'firebase/auth';
+import SingleProduct from './pages/SingleProduct/SingleProduct';
+import About from './components/About/About';
+import Contact from './components/Contact/Contact';
 function App() {
 
 
@@ -34,13 +37,11 @@ function App() {
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item))
 
       setCart(upDateCart);
+      toast.success("Product added to cart")
     } else {
       setCart([...cart, { ...product, quantity: 1 }])
 
     }
-
-
-    console.log(cart)
 
   }
 
@@ -100,7 +101,7 @@ function App() {
         setUserName("")
       }
     })
-    
+
   }, [])
 
   return (
@@ -112,6 +113,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart cart={cart} handleDec={handleDec} handleInc={handleInc} handleRemove={handleRemove} getTotalPrice={getTotalPrice} applyPromoCode={applyPromoCode} promocode={promocode} setPromoCode={setPromoCode} invalid={invalid} />} />
             <Route path="/allproducts" element={<AllProducts AddToCart={AddToCart} />} />
+            <Route path="/about" element={<About/>} />
+            <Route path="/contact" element={<Contact/>} />
+            
+            <Route path="/singleProduct/:productId" element={<SingleProduct AddToCart={AddToCart} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/Signup" element={<SignUp />} />
           </Routes>

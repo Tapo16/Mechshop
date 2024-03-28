@@ -4,7 +4,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 
-const Navbar = ({ cart,userName }) => {
+const Navbar = ({ cart, userName }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const ToggleChange = () => {
@@ -33,8 +33,12 @@ const Navbar = ({ cart,userName }) => {
                 <Link to="/allproducts">
                   <li className="mr-5 hover:text-gray-900 cursor-pointer">All Products</li>
                 </Link>
-                <li className="mr-5 hover:text-gray-900 cursor-pointer">Mens</li>
-                <li className="mr-5 hover:text-gray-900 cursor-pointer">Kids</li>
+                <Link to="/about">
+                  <li className="mr-5 hover:text-gray-900 cursor-pointer">About</li>
+                </Link>
+                <Link to="/Contact">
+                <li className="mr-5 hover:text-gray-900 cursor-pointer">Contact</li>
+                </Link>
               </ul>
             </div>
 
@@ -60,12 +64,12 @@ const Navbar = ({ cart,userName }) => {
                   Login
                 </button>
               </Link>
-            <span>{userName}</span>
+              <span>{userName}</span>
 
               <Link to='/cart'>
                 <button>
-                <span className="text-[red]">{cart.length}</span>
-                <FaCartShopping size={25} />
+                  <span className="text-[red]">{cart.length}</span>
+                  <FaCartShopping size={25} />
                 </button>
               </Link>
               {

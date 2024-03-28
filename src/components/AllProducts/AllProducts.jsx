@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from "axios";
 import login from '../../assets/login.png'
+import { Link } from 'react-router-dom';
 
 const AllProducts = ({ AddToCart }) => {
 
@@ -104,7 +105,7 @@ const AllProducts = ({ AddToCart }) => {
 
 
 				<div className="bg-[#e2e0e0] container mx-auto rounded-md py-3 mt-4">
-				{/* products category section*/}
+					{/* products category section*/}
 					<div className="text-center mt-4">
 						<select onChange={(e) => filterProducts(e.target.value)}>
 							<option>Filter The Products</option>
@@ -139,7 +140,9 @@ const AllProducts = ({ AddToCart }) => {
 					{
 						allProducts.map((AllItems) => (
 							<div className="border-4" key={AllItems.id}>
-								<img src={AllItems.thumbnail} alt="" className="object-cover object-center block h-[300px] w-[450px]" />
+								<Link className="block relative h-48 rounded overflow-hidden" to={`/singleProduct/${AllItems.id}`}>
+									<img src={AllItems.thumbnail} alt="ecommerce" className="object-cover object-center block h-[300px] w-[450px]"/>
+								</Link>
 
 								<div className="flex justify-between items-center">
 									<div className="mt-4">

@@ -7,7 +7,7 @@ import { auth } from '../../FirebaseAuth/FirebaseAuth';
 
 const SignUp = () => {
 
-const navigateLogin = useNavigate();
+  const navigateLogin = useNavigate();
 
   const [UserSignUp, SetUserSignup] = useState({ username: "", email: "", password: "" })
 
@@ -22,9 +22,9 @@ const navigateLogin = useNavigate();
       return toast.error("Fill all the fields are required");
     } else {
       createUserWithEmailAndPassword(auth,
-        UserSignUp.email, UserSignUp.password).then(async(res) => {
+        UserSignUp.email, UserSignUp.password).then(async (res) => {
           const user = res.user
-         await updateProfile(user,{
+          await updateProfile(user, {
             displayName: UserSignUp.username
           })
 
@@ -37,11 +37,11 @@ const navigateLogin = useNavigate();
   return (
     <>
 
-      {/* <div className='relative'>
+      <div className='relative'>
         <img src={login} alt="" className="object-cover w-full object-center h-[200px] mt-5" />
         <div className='w-full h-[200px] bg-black absolute top-0 left-0 opacity-[.4]'></div>
         <h2 className='absolute top-[40%] left-[10%] text-white font-semibold text-3xl md:text-5xl'>Sign Up </h2>
-      </div>  */}
+      </div>
 
 
       <div className="container px-5 py-14 mx-auto flex">
