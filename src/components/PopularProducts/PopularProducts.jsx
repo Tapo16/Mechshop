@@ -35,7 +35,7 @@ const PopularProducts = ({AddToCart}) => {
 				<div className="container px-5 py-24 mx-auto">
 					<div className="flex flex-wrap -m-4">
 						{
-							popularProducts.filter((item,index)=> index !== 3 ).map((popularItem) => (
+							popularProducts.filter((item,index)=> index !== 1 ).map((popularItem) => (
 								<div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={popularItem.id}>
 									<a className="block relative h-48 rounded overflow-hidden">
 										<img alt="ecommerce" className="object-cover object-center w-full h-full block" src={popularItem.thumbnail} />
