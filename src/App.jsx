@@ -110,7 +110,7 @@ function App() {
         <BrowserRouter>
           <Navbar cart={cart} userName={userName} />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home  AddToCart={AddToCart} />} />
             <Route path="/cart" element={<Cart cart={cart} handleDec={handleDec} handleInc={handleInc} handleRemove={handleRemove} getTotalPrice={getTotalPrice} applyPromoCode={applyPromoCode} promocode={promocode} setPromoCode={setPromoCode} invalid={invalid} />} />
             <Route path="/allproducts" element={<AllProducts AddToCart={AddToCart} />} />
             <Route path="/about" element={<About/>} />

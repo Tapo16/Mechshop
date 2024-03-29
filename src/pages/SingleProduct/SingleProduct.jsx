@@ -17,9 +17,7 @@ const SingleProduct = ({ AddToCart }) => {
 			} catch (err) {
 				toast.error(err.message);
 			}
-
 		}
-
 		SingleProductFetch();
 	}, [productId])
 
